@@ -20,11 +20,12 @@ def check_s(i):
     for j in range(len(dX_s)):
         dx = x + dX_s[j]
         dy = y + dY_s[j] +1
+        if not ( 0 < dx < C + 1 and dy < R+1):
+            break
         if dy <= 0:
             continue
-        if 0 < dx < C + 1 and 0 < dy < R + 1:
-            if soop[dy][dx] != 0:
-                break
+        if soop[dy][dx] != 0:
+            break
         else:
             break
     else:
@@ -38,11 +39,12 @@ def check_w(i):
     for j in range(len(dX_s)):
         dx = x + dX_s[j] -1
         dy = y + dY_s[j] +1
+        if not ( 0 < dx < C + 1 and dy < R+1):
+            break
         if dy <= 0:
             continue
-        if 0 < dx < C + 1 and 0 < dy < R + 1:
-            if soop[dy][dx] != 0:
-                break
+        if soop[dy][dx] != 0:
+            break
         else:
             break
     else:
@@ -58,11 +60,12 @@ def check_e(i):
     for j in range(len(dX_s)):
         dx = x + dX_s[j] +1
         dy = y + dY_s[j] +1
+        if not ( 0 < dx < C + 1 and dy < R+1):
+            break
         if dy <= 0:
             continue
-        if 0 < dx < C + 1 and 0 < dy < R + 1:
-            if soop[dy][dx] != 0:
-                break
+        if soop[dy][dx] != 0:
+            break
         else:
             break
     else:
