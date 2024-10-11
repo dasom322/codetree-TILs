@@ -1,5 +1,7 @@
 from collections import deque
 import copy
+import sys
+input = sys.stdin.readline
 
 K, _ = map(int, input().split())
 _map = [list(map(int, input().split())) for _ in range(5)]
