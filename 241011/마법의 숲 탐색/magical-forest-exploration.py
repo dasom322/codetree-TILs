@@ -113,7 +113,7 @@ for i in range(K):
         if check_e(i):
             continue
         break
-    if golam[i][2] == 0 or golam[i][2] == 1:
+    if golam[i][2] < 2:
         reset()
         continue
     result += point(i)
