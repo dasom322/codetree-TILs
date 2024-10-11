@@ -26,8 +26,6 @@ def check_s(i):
             continue
         if soop[dy][dx] != 0:
             break
-        else:
-            break
     else:
         golam[i][2], golam[i][3] = y + 1, x
         return True
@@ -44,8 +42,6 @@ def check_w(i):
         if dy <= 0:
             continue
         if soop[dy][dx] != 0:
-            break
-        else:
             break
     else:
         golam[i][2], golam[i][3] = y + 1, x - 1
@@ -65,8 +61,6 @@ def check_e(i):
         if dy <= 0:
             continue
         if soop[dy][dx] != 0:
-            break
-        else:
             break
     else:
         golam[i][2], golam[i][3] = y + 1, x + 1
