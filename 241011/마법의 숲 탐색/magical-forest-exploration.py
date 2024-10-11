@@ -1,12 +1,8 @@
 R, C, K = map(int, input().split())
 golam = [list(map(int, input().split())) for _ in range(K)]
 soop = [[0] * (C + 1) for _ in range(R + 1)]
-dX_s = [-1, 0, 1]
-dY_s = [1, 2, 1]
-dX_w = [-1, -2, -2, -1, -1]
-dY_w = [-1, 0, 1, 1, 2]
-dX_e = [1, 2, 2, 1, 1]
-dY_e = [-1, 0, 1, 1, 2]
+dX_s = [-1, 0, 1, -1, 0, 1, 0]
+dY_s = [-1, -1, -1, 0, 0, 0, 1]
 dX = [0, 1, 0, -1, 0]
 dY = [-1, 0, 1, 0, 0]
 score = [0] * K
@@ -21,9 +17,9 @@ def reset():
 
 def check_s(i):
     y, x = golam[i][2], golam[i][3]
-    for j in range(3):
+    for j in range(len(dX_s)):
         dx = x + dX_s[j]
-        dy = y + dY_s[j]
+        dy = y + dY_s[j] +1
         if dy <= 0:
             continue
         if 0 < dx < C + 1 and 0 < dy < R + 1:
@@ -39,9 +35,9 @@ def check_s(i):
 
 def check_w(i):
     y, x = golam[i][2], golam[i][3]
-    for j in range(5):
-        dx = x + dX_w[j]
-        dy = y + dY_w[j]
+    for j in range(len(dX_s)):
+        dx = x + dX_s[j] -1
+        dy = y + dY_s[j] +1
         if dy <= 0:
             continue
         if 0 < dx < C + 1 and 0 < dy < R + 1:
@@ -59,9 +55,9 @@ def check_w(i):
 
 def check_e(i):
     y, x = golam[i][2], golam[i][3]
-    for j in range(5):
-        dx = x + dX_e[j]
-        dy = y + dY_e[j]
+    for j in range(len(dX_s)):
+        dx = x + dX_s[j] +1
+        dy = y + dY_s[j] +1
         if dy <= 0:
             continue
         if 0 < dx < C + 1 and 0 < dy < R + 1:
@@ -71,7 +67,7 @@ def check_e(i):
             break
     else:
         golam[i][2], golam[i][3] = y + 1, x + 1
-        golam[i][1] += 5
+        golam[i][1] += 1
         golam[i][1] %= 4
         return True
     return False
