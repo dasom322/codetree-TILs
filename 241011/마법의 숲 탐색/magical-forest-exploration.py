@@ -1,6 +1,6 @@
 R, C, K = map(int, input().split())
 golam = [list(map(int, input().split())) for _ in range(K)]
-soop = [[0] * (C + 1) for _ in range(R + 1)]
+soop = [[0] * C for _ in range(R+3)]
 dX_s = [-1, 0, 1, -1, 0, 1, 0]
 dY_s = [-1, -1, -1, 0, 0, 0, 1]
 dX = [0, 1, 0, -1, 0]
@@ -11,7 +11,7 @@ result = 0
 
 def reset():
     global soop, score
-    soop = [[0] * (C + 1) for _ in range(R + 1)]
+    soop = [[0] * C for _ in range(R+3)]
     score = [0] * K
 
 
@@ -20,9 +20,9 @@ def check_s(i):
     for j in range(len(dX_s)):
         dx = x + dX_s[j]
         dy = y + dY_s[j] +1
-        if not ( 0 < dx < C + 1 and dy < R+1):
+        if not ( 0 <= dx < C and dy < R+3):
             break
-        if dy <= 0:
+        if dy < 3:
             continue
         if soop[dy][dx] != 0:
             break
@@ -37,9 +37,9 @@ def check_w(i):
     for j in range(len(dX_s)):
         dx = x + dX_s[j] -1
         dy = y + dY_s[j] +1
-        if not ( 0 < dx < C + 1 and dy < R+1):
+        if not ( 0 <= dx < C and dy < R+3):
             break
-        if dy <= 0:
+        if dy < 3:
             continue
         if soop[dy][dx] != 0:
             break
@@ -56,9 +56,9 @@ def check_e(i):
     for j in range(len(dX_s)):
         dx = x + dX_s[j] +1
         dy = y + dY_s[j] +1
-        if not ( 0 < dx < C + 1 and dy < R+1):
+        if not ( 0 <= dx < C and dy < R+3):
             break
-        if dy <= 0:
+        if dy < 3:
             continue
         if soop[dy][dx] != 0:
             break
@@ -75,7 +75,7 @@ def point(i):
     for j in range(5):
         dx = x + dX[j]
         dy = y + dY[j]
-        if 0 < dx < C + 1 and 0 < dy < R + 1:
+        if 0 <= dx < C and 0 <= dy < R+3:
             soop[dy][dx] = i + 1
 
     cx, cy = x + dX[golam[i][1]], y + dY[golam[i][1]]
@@ -84,19 +84,17 @@ def point(i):
     for j in range(4):
         dx = cx + dX[j]
         dy = cy + dY[j]
-        if 0 < dx < C + 1 and 0 < dy < R + 1 and soop[dy][dx] != 0 and soop[dy][dx] != i + 1:
-            score[i] = max(score[i], score[soop[dy][dx] - 1])
+        if 0 <= dx < C and 0 <= dy < R+3 and soop[dy][dx] != 0 and soop[dy][dx] != i + 1:
+            score[i] = max(score[i], score[soop[dy][dx]-1])
 
-    return score[i]
+    return score[i]-2
 
 
 for i in range(K):
     c, d = golam[i]
-    if soop[1][c] != 0:
-        reset()
-        continue
-    golam[i].append(0)  # y
-    golam[i].append(c)  # x
+
+    golam[i].append(1)  # y
+    golam[i].append(c-1)  # x
 
     while True:
         if check_s(i):
@@ -106,7 +104,7 @@ for i in range(K):
         if check_e(i):
             continue
         break
-    if golam[i][2] < 2:
+    if golam[i][2] < 4:
         reset()
         continue
     result += point(i)
