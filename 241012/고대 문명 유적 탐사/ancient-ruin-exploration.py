@@ -27,7 +27,7 @@ def function_1(i, j, k):
     for x in range(5):
         for y in range(5):
             if map1[y][x] == 0:
-                break
+                continue
             queue = deque([(y, x, map1[y][x])])
             map1[y][x] = 0
             cnt = 1
@@ -66,7 +66,7 @@ def function_2(i, j, k):
         for x in range(5):
             for y in range(5):
                 if map1[y][x] == 0:
-                    break
+                    continue
                 queue = deque([(y, x, map1[y][x])])
                 map1[y][x] = 0
                 cnt = 1
