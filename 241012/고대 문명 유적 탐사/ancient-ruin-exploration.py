@@ -1,7 +1,5 @@
 from collections import deque
 import copy
-import sys
-input = sys.stdin.readline
 
 K, _ = map(int, input().split())
 _map = [list(map(int, input().split())) for _ in range(5)]
@@ -29,7 +27,7 @@ def function_1(i, j, k):
     for x in range(5):
         for y in range(5):
             if map1[y][x] == 0:
-                continue
+                break
             queue = deque([(y, x, map1[y][x])])
             map1[y][x] = 0
             cnt = 1
@@ -52,7 +50,7 @@ def function_2(i, j, k):
     for idx in range(len(dX)):
         y, x = j + dY[idx], i + dX[idx]
         list1.append(_map[y][x])
-    
+
     for idx in range(len(dX)):
         iidx = (idx + (k + 1)*2) % 8
         y, x = j + dY[iidx], i + dX[iidx]
@@ -60,6 +58,7 @@ def function_2(i, j, k):
 
     #map1 = copy.deepcopy(_map)
     list1 = []
+    list2 = []
     result = 0
     flag = True
     while flag:
@@ -68,7 +67,7 @@ def function_2(i, j, k):
         for x in range(5):
             for y in range(5):
                 if map1[y][x] == 0:
-                    continue
+                    break
                 queue = deque([(y, x, map1[y][x])])
                 map1[y][x] = 0
                 cnt = 1
@@ -86,10 +85,12 @@ def function_2(i, j, k):
                             cnt += 1
                 if cnt > 2:
                     flag = True
-                    list1.sort(key=lambda x: (x[0], -x[1]))
-                    for xx, yy in list1:
-                        _map[yy][xx] = num.popleft()
                     result += cnt
+                    list2 += list1
+        list2.sort(key=lambda x: (x[0], -x[1]))
+        for xx, yy in list2:
+            _map[yy][xx] = num.popleft()
+        list2=[]
 
     return result
 
