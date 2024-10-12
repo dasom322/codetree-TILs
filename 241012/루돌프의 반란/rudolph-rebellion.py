@@ -102,7 +102,7 @@ for _ in range(M):
     else:
         dx = 0
     rudolf_go(dy, dx)
-    if not santa_alive:  # 산타 모두 탈락
+    if not santa_alive():  # 산타 모두 탈락
         break
 
     for s in santa:
@@ -127,7 +127,7 @@ for _ in range(M):
         dx = dX[dis[0][1]]
         santa_go(s[0], dy, dx)
 
-    if not santa_alive:  # 산타 모두 탈락
+    if not santa_alive():  # 산타 모두 탈락
         break
 
     # 턴 종료 산타 +1점
