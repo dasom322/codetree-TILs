@@ -37,8 +37,8 @@ def rudolf_go(dy, dx):
             if new_santa == 0:
                 break
             santa_number = new_santa
-            santa[santa_number][1] -= dy
-            santa[santa_number][2] -= dx
+            santa[santa_number][1] += dy
+            santa[santa_number][2] += dx
     grid[rudolf[0]][rudolf[1]] = -1
 
 
